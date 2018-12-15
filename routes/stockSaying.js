@@ -28,7 +28,7 @@ router.post('/author', function(req, res){
     if(err){
       console.log(err);
     }else{
-      responseUtil.successTrue();
+      res.json(responseUtil.successTrue());
       console.log('Success to register author');
     }
   })
