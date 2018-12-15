@@ -16,7 +16,6 @@ app.use(function(erq, res, next){
 
 app.use('/api/stockSaying', require('./routes/stockSaying'));
 
-
 app.use(function(req, res, next){
   res.status(404);
   res.json({
