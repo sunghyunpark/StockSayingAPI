@@ -20,6 +20,6 @@ app.use(function(req, res, next){
   return;
 });
 
-app.listen(3000, function(){
-  console.log('Connected, StockSaying 3000 port!');
+app.listen(1038, function(){
+  console.log('Connected, StockSaying 1038 port!');
 })
