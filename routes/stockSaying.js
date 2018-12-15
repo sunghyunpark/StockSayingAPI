@@ -34,8 +34,9 @@ router.post('/author', function(req, res){
 })
 
 
-router.get('/authorList', function(req, res){
-  console.log('author list called');
+router.get('/authorList/:id', function(req, res){
+  var id = req.params.id;
+  console.log(id);
 })
 
 module.exports = router;
