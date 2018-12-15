@@ -8,10 +8,6 @@ app.use(bodyParser.json());
 
 app.use('/api/stockSaying', require('./routes/stockSaying'));
 
-app.use('/', function(req, res){
-  res.send("hello");
-})
-
 app.use(function(req, res, next){
   res.status(404);
   res.json({

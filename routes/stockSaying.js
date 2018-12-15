@@ -5,7 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var router = express.Router();
-
+var responseUtil = require('../util/responseUtil');
 var conn = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -28,6 +28,7 @@ router.post('/author', function(req, res){
     if(err){
       console.log(err);
     }else{
+      responseUtil.successTrue();
       console.log('Success to register author');
     }
   })
