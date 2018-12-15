@@ -21,6 +21,8 @@ conn.connect();
 router.post('/author', function(req, res){
   var authorName = req.body.authorName;
 
+  console.log('author called');
+
   var sql = 'INSERT INTO author (author_name) VALUES(?)';
   conn.query(sql, [authorName], function(err, result, fields){
     if(err){
