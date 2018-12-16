@@ -75,7 +75,7 @@ router.get('/recent', function(req, res){
   'text_size AS textSize, '+
   'gravity_horizontal AS gravityHorizontal, '+
   'gravity_vertical AS gravityVertical, '+
-  'created_at AS createdAt, '+
+  'created_at AS createdAt '+
   'FROM article ORDER BY created_at DESC LIMIT 1';
 
   conn.query(sql, [], function(err, result, fields){
