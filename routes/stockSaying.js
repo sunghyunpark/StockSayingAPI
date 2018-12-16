@@ -27,6 +27,7 @@ router.post('/author', function(req, res){
   conn.query(sql, [authorName], function(err, result, fields){
     if(err){
       console.log(err);
+      res.json(responseUtil.successFalse(500, '이미 등록한 작가가 존재합니다.'));
     }else{
       res.json(responseUtil.successTrue());
       console.log('Success to register author');
