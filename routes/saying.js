@@ -55,6 +55,19 @@ router.put('/edit/saying', function(req,res){
   })
 })
 
+router.delete('/delete', function(req, res){
+  var no = req.params.no;
+
+  var sql = 'DELETE FROM article WHERE no=?';
+  conn.query(sql, [no], function(err, result, fields){
+    if(err){
+      console.log(err);
+    }else{
+      res.json(responseUtil.successTrue());
+    }
+  })
+})
+
 /*
 * 명언 리스트 10개씩 내려 받기
 */
