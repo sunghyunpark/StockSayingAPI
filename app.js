@@ -6,7 +6,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.use('/api/stockSaying', require('./routes/stockSaying'));
+app.use('/api/author', require('./routes/author'));
+app.use('/api/saying', require('./routes/saying'));
 
 app.use(function(req, res, next){
   res.status(404);
