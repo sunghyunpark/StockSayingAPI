@@ -54,7 +54,7 @@ router.get('/list/saying/:no/:sort', function(req, res){
   'gravity_horizontal AS gravityHorizontal, '+
   'gravity_vertical AS gravityVertical, '+
   'created_at AS createdAt '+
-  'FROM article '+ offset + sortSql + ' ORDER BY created_at DESC LIMIT 10';
+  'FROM article '+ offset + ' ORDER BY created_at DESC LIMIT 10';
 
   conn.query(sql, [sort], function(err, result, fields){
     if(err){
