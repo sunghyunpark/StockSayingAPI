@@ -48,7 +48,7 @@ router.get('/list/saying/:no/:sort', function(req, res){
   }
 
   var sql = 'SELECT no, '+
-  'cotents, '+
+  'contents, '+
   'author_name AS authorName, '+
   'text_size AS textSize, '+
   'gravity_horizontal AS gravityHorizontal, '+
