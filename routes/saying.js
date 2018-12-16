@@ -36,8 +36,32 @@ router.post('/upload/saying', function(req, res){
   })
 })
 
-router.get('/list/saying', function(req, res){
+router.get('/list/saying/:no/:sort', function(req, res){
+  var no = req.params.no;
+  var sort = req.params.sort;
 
+  var sortSql = '';
+  var offset = (no == 0) ? '' : 'WHERE created_at < (SELECT created_at FROM article WHERE no='+no+')';
+  if(sort != 'all'){
+    sortSql = 'AND author_name = ?';
+  }
+
+  var sql = 'SELECT no, '+
+  'cotents, '+
+  'author_name AS authorName, '+
+  'text_size AS textSize, '+
+  'gravity_horizontal AS gravityHorizontal, '+
+  'gravity_vertical AS gravityVertical, '+
+  'created_at AS createdAt '+
+  'FROM article '+ offset + sortSql + ' ORDER BY created_at DESC LIMIT 10';
+
+  conn.query(sql, [no, sort], function(err, result, fields){
+    if(err){
+      console.log(err);
+    }else{
+      res.json(responseUtil.successTrueWithData(result));
+    }
+  })
 })
 
 module.exports = router;
