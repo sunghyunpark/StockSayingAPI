@@ -36,7 +36,7 @@ router.post('/upload/saying', function(req, res){
   })
 })
 
-router.put('/edit/saying', function(req,res){
+router.put('/edit/saying', function(req, res){
   var no = req.body.no;
   var contents = req.body.contents;
   var date = req.body.date;
@@ -55,7 +55,7 @@ router.put('/edit/saying', function(req,res){
   })
 })
 
-router.delete('/delete', function(req, res){
+router.delete('/delete/:no', function(req, res){
   var no = req.params.no;
 
   var sql = 'DELETE FROM article WHERE no=?';
