@@ -36,6 +36,9 @@ router.post('/author', function(req, res){
 })
 
 
+/*
+* author List 받기
+*/
 router.get('/authorList', function(req, res){
   var sql = 'SELECT author_name AS authorName FROM author';
   conn.query(sql, [], function(err, result, fields){
@@ -44,6 +47,28 @@ router.get('/authorList', function(req, res){
     }else{
       res.json(responseUtil.successTrueWithData(result));
       console.log('Success to get author list');
+    }
+  })
+})
+
+/*
+* 명언 등록
+*/
+router.post('/upload/saying', function(req, res){
+  var contents = req.body.contents;
+  var date = req.body.date;
+  var authorName = req.body.authorName;
+  var gravityHorizontal = req.body.gravityHorizontal;
+  var gravityVertical = req.body.gravityVertical;
+  var textSize = req.body.textSize;
+
+  var sql = 'INSERT INTO article (contents, author_name, text_size, gravity_horizontal, gravity_vertical, created_at) '+
+  'VALUES(?,?,?,?,?,?)';
+  conn.query(sql, [contents, authorName, textSize, gravityHorizontal, gravityVertical, date], function(err, result, fields){
+    if(err){
+      console.log(err);
+    }else{
+      res.json(responseUtil.successTrue());
     }
   })
 })
