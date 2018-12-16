@@ -36,6 +36,10 @@ router.post('/upload/saying', function(req, res){
   })
 })
 
+/*
+* 명언 리스트 10개씩 내려 받기
+*/
+
 router.get('/list/saying/:no/:sort', function(req, res){
   var no = req.params.no;
   var sort = req.params.sort;
@@ -57,6 +61,24 @@ router.get('/list/saying/:no/:sort', function(req, res){
   'FROM article '+ offset + ' ORDER BY created_at DESC LIMIT 10';
 
   conn.query(sql, [sort], function(err, result, fields){
+    if(err){
+      console.log(err);
+    }else{
+      res.json(responseUtil.successTrueWithData(result));
+    }
+  })
+})
+
+router.get('/recent', function(req, res){
+  var sql = 'SELECT contents, '+
+  'author_name AS authorName, '+
+  'text_size AS textSize, '+
+  'gravity_horizontal AS gravityHorizontal, '+
+  'gravity_vertical AS gravityVertical, '+
+  'created_at AS createdAt, '+
+  'FROM article ORDER BY created_at DESC LIMIT 1';
+
+  conn.query(sql, [], function(err, result, fields){
     if(err){
       console.log(err);
     }else{
