@@ -51,6 +51,7 @@ router.put('/edit/saying', function(req,res){
       console.log(err);
     }else{
       res.json(responseUtil.successTrue());
+    }
   })
 })
 
