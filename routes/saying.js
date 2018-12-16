@@ -40,10 +40,11 @@ router.get('/list/saying/:no/:sort', function(req, res){
   var no = req.params.no;
   var sort = req.params.sort;
 
-  var sortSql = '';
-  var offset = (no == 0) ? '' : 'WHERE created_at < (SELECT created_at FROM article WHERE no='+no+')';
-  if(sort != 'all'){
-    sortSql = 'AND author_name = ?';
+  var offset = '';
+  if(sort == 'all'){
+    offset = (no == 0) ? '' : 'WHERE created_at < (SELECT created_at FROM article WHERE no='+no+')';
+  }else{
+    offset = (no == 0) ? 'WHERE author_name = ?' : 'WHERE created_at < (SELECT created_at FROM article WHERE no='+no+') AND author_name = ?';
   }
 
   var sql = 'SELECT no, '+
@@ -55,7 +56,7 @@ router.get('/list/saying/:no/:sort', function(req, res){
   'created_at AS createdAt '+
   'FROM article '+ offset + sortSql + ' ORDER BY created_at DESC LIMIT 10';
 
-  conn.query(sql, [no, sort], function(err, result, fields){
+  conn.query(sql, [sort], function(err, result, fields){
     if(err){
       console.log(err);
     }else{
