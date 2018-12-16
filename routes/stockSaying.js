@@ -35,9 +35,16 @@ router.post('/author', function(req, res){
 })
 
 
-router.get('/authorList/:id', function(req, res){
-  var id = req.params.id;
-  console.log(id);
+router.get('/authorList', function(req, res){
+  var sql = 'SELECT author_name AS authorName FROM author';
+  conn.query(sql, [], function(err, result, fields){
+    if(err){
+      console.log(err);
+    }else{
+      res.json(responseUtil.successTrueWithData(result));
+      console.log('Success to get author list');
+    }
+  })
 })
 
 module.exports = router;
