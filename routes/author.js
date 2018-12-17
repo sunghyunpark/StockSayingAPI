@@ -23,7 +23,7 @@ router.post('/upload/author', function(req, res){
 
   console.log('author called');
 
-  var sql = 'INSERT INTO author (author_name, no) VALUES(?)';
+  var sql = 'INSERT INTO author (author_name) VALUES(?)';
   conn.query(sql, [authorName], function(err, result, fields){
     if(err){
       console.log(err);
