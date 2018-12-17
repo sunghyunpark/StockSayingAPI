@@ -18,14 +18,13 @@ conn.connect();
 /*
 * author 등록
 */
-router.post('/author', function(req, res){
+router.post('/upload/author', function(req, res){
   var authorName = req.body.authorName;
-  var no = req.body.no;
 
   console.log('author called');
 
-  var sql = 'INSERT INTO author (author_name, no) VALUES(?, ?)';
-  conn.query(sql, [authorName, no], function(err, result, fields){
+  var sql = 'INSERT INTO author (author_name, no) VALUES(?)';
+  conn.query(sql, [authorName], function(err, result, fields){
     if(err){
       console.log(err);
       res.json(responseUtil.successFalse(500, '이미 등록한 작가가 존재합니다.'));
@@ -41,6 +40,7 @@ router.post('/author', function(req, res){
 * author List 받기
 */
 router.get('/authorList', function(req, res){
+
   var sql = 'SELECT author_name AS authorName FROM author';
   conn.query(sql, [], function(err, result, fields){
     if(err){
