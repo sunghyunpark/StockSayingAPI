@@ -24,16 +24,29 @@ router.post('/upload/author', function(req, res){
 
   console.log('author called');
 
-  var sql = 'INSERT INTO author (author_name, created_at) VALUES(?, ?)';
-  conn.query(sql, [authorName, currentTime], function(err, result, fields){
+  var sql = 'SELECT author_name FROM author WHERE author_name = ?';
+  conn.query(sql, [authorName], function(err, result, fields){
     if(err){
-      console.log(err);
-      res.json(responseUtil.successFalse(500, '이미 등록한 작가가 존재합니다.'));
+      console.log('select err');
     }else{
-      res.json(responseUtil.successTrue());
-      console.log('Success to register author');
+      console.log(result.length()+'개');
+      if(result.length() > 0){
+        res.json(responseUtil.successFalse(500, '이미 등록한 작가가 존재합니다.'));
+      }else{
+        var sql = 'INSERT INTO author (author_name, created_at) VALUES(?, ?)';
+        conn.query(sql, [authorName, currentTime], function(err, result, fields){
+          if(err){
+            console.log(err);
+            res.json(responseUtil.successFalse(500, '이미 등록한 작가가 존재합니다.'));
+          }else{
+            res.json(responseUtil.successTrue());
+            console.log('Success to register author');
+          }
+        })
+      }
     }
   })
+
 })
 
 
