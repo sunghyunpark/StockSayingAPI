@@ -29,8 +29,8 @@ router.post('/upload/author', function(req, res){
     if(err){
       console.log('select err');
     }else{
-      console.log(result.length()+'개');
-      if(result.length() > 0){
+      console.log(result.length+'개');
+      if(result.length > 0){
         res.json(responseUtil.successFalse(500, '이미 등록한 작가가 존재합니다.'));
       }else{
         var sql = 'INSERT INTO author (author_name, created_at) VALUES(?, ?)';
