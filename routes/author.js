@@ -20,11 +20,12 @@ conn.connect();
 */
 router.post('/upload/author', function(req, res){
   var authorName = req.body.authorName;
+  var currentTime = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
 
   console.log('author called');
 
-  var sql = 'INSERT INTO author (author_name) VALUES(?)';
-  conn.query(sql, [authorName], function(err, result, fields){
+  var sql = 'INSERT INTO author (author_name, created_at) VALUES(?, ?)';
+  conn.query(sql, [authorName, currentTime], function(err, result, fields){
     if(err){
       console.log(err);
       res.json(responseUtil.successFalse(500, '이미 등록한 작가가 존재합니다.'));
