@@ -39,14 +39,13 @@ router.post('/upload/saying', function(req, res){
 router.put('/edit/saying', function(req, res){
   var no = req.body.no;
   var contents = req.body.contents;
-  var date = req.body.date;
   var authorName = req.body.authorName;
   var gravityHorizontal = req.body.gravityHorizontal;
   var gravityVertical = req.body.gravityVertical;
   var textSize = req.body.textSize;
 
-  var sql = 'UPDATE article SET contents=?, author_name=?, text_size=?, gravity_horizontal=?, gravity_vertical=?, created_at=? WHERE no=?';
-  conn.query(sql, [contents, authorName, textSize, gravityHorizontal, gravityVertical, date, no], function(err, result, fields){
+  var sql = 'UPDATE article SET contents=?, author_name=?, text_size=?, gravity_horizontal=?, gravity_vertical=? WHERE no=?';
+  conn.query(sql, [contents, authorName, textSize, gravityHorizontal, gravityVertical, no], function(err, result, fields){
     if(err){
       console.log(err);
     }else{
