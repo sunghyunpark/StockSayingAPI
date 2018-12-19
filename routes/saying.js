@@ -78,9 +78,9 @@ router.get('/list/saying/:no/:sort', function(req, res){
 
   var offset = '';
   if(sort == 'all'){
-    offset = (no == 0) ? '' : 'WHERE created_at < (SELECT created_at FROM article WHERE no='+no+')';
+    offset = (no == 0) ? '' : 'WHERE article.created_at < (SELECT created_at FROM article WHERE no='+no+')';
   }else{
-    offset = (no == 0) ? 'WHERE author_name = ?' : 'WHERE created_at < (SELECT created_at FROM article WHERE no='+no+') AND author_name = ?';
+    offset = (no == 0) ? 'WHERE article.author_name = ?' : 'WHERE article.created_at < (SELECT created_at FROM article WHERE no='+no+') AND author_name = ?';
   }
 
   var sql = 'SELECT no, '+
