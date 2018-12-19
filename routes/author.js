@@ -57,7 +57,7 @@ router.get('/authorList/:no', function(req, res){
   var sql = 'SELECT author_name AS authorName, '+
   'no, '+
   'created_at AS createdAt'+
-  ' FROM author' + offsetSql;
+  ' FROM author' + offsetSql + ' ORDER BY created_at DESC LIMIT 10';
 
   conn.query(sql, [], function(err, result, fields){
     if(err){
