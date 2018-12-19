@@ -23,7 +23,7 @@ router.post('/upload/saying', function(req, res){
   var gravityHorizontal = req.body.gravityHorizontal;
   var gravityVertical = req.body.gravityVertical;
   var textSize = req.body.textSize;
-  var currentTime = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
+  var currentTime = req.body.date;
 
   var sql = 'INSERT INTO article (contents, author_name, text_size, gravity_horizontal, gravity_vertical, created_at) '+
   'VALUES(?,?,?,?,?,?)';
@@ -43,9 +43,10 @@ router.put('/edit/saying', function(req, res){
   var gravityHorizontal = req.body.gravityHorizontal;
   var gravityVertical = req.body.gravityVertical;
   var textSize = req.body.textSize;
+  var currentTime = req.body.date;
 
-  var sql = 'UPDATE article SET contents=?, author_name=?, text_size=?, gravity_horizontal=?, gravity_vertical=? WHERE no=?';
-  conn.query(sql, [contents, authorName, textSize, gravityHorizontal, gravityVertical, no], function(err, result, fields){
+  var sql = 'UPDATE article SET contents=?, author_name=?, text_size=?, gravity_horizontal=?, gravity_vertical=?, created_at=? WHERE no=?';
+  conn.query(sql, [contents, authorName, textSize, gravityHorizontal, gravityVertical, currentTime, no], function(err, result, fields){
     if(err){
       console.log(err);
     }else{
