@@ -47,13 +47,18 @@ router.post('/upload/author', function(req, res){
 
 })
 
-
 /*
 * author List 받기
 */
-router.get('/authorList', function(req, res){
+router.get('/authorList/:no', function(req, res){
+  var no = req.params.no;
+  var offsetSql = (no == 0) ? '' : ' WHERE created_at < (SELECT created_at FROM author WHERE no='+no+')';
 
-  var sql = 'SELECT author_name AS authorName FROM author';
+  var sql = 'SELECT author_name AS authorName, '+
+  'no, '+
+  'created_at AS createdAt'+
+  ' FROM author' + offsetSql;
+
   conn.query(sql, [], function(err, result, fields){
     if(err){
       console.log(err);
