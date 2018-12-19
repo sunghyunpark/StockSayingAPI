@@ -53,11 +53,11 @@ router.post('/upload/author', function(req, res){
 router.get('/authorList/:no', function(req, res){
   var no = req.params.no;
   var offsetSql = (no == 0) ? '' : ' WHERE author.created_at < (SELECT created_at FROM author WHERE no='+no+')';
-  console.log(no+' 들어옴');
+
   var sql = 'SELECT author_name AS authorName, '+
   'no, '+
   'created_at AS createdAt'+
-  ' FROM author' + offsetSql + ' ORDER BY created_at DESC LIMIT 10';
+  ' FROM author' + offsetSql + ' ORDER BY created_at DESC LIMIT 30';
 
   conn.query(sql, [], function(err, result, fields){
     if(err){
