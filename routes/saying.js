@@ -9,7 +9,7 @@ var responseUtil = require('../util/responseUtil');
 var conn = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'qkr103838!@',
+  //password : 'qkr103838!@',
   database : 'stockSaying'
 });
 conn.connect();
