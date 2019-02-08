@@ -44,7 +44,22 @@ router.post('/upload/author', function(req, res){
       }
     }
   })
+})
 
+/*
+* author 삭제
+*/
+router.delete('/delete/author/:no', function(req, res){
+  var no = req.params.no;
+  var sql = 'DELETE FROM author WHERE no=?';
+  conn.query(sql, [no], function(err, result, fields){
+    if(err){
+      console.log(err);
+    }else{
+      res.json(responseUtil.successTrue());
+      console.log('Success to delete author');
+    }
+  })
 })
 
 /*
