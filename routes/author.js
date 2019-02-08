@@ -51,13 +51,21 @@ router.post('/upload/author', function(req, res){
 */
 router.delete('/delete/author/:no', function(req, res){
   var no = req.params.no;
+  var authorName = req.params.authorName;
   var sql = 'DELETE FROM author WHERE no=?';
   conn.query(sql, [no], function(err, result, fields){
     if(err){
       console.log(err);
     }else{
-      res.json(responseUtil.successTrue());
-      console.log('Success to delete author');
+      var sql = 'DELETE FROM article WHERE author_name=?';
+      conn.query(sql, [authorName], function(err, result, fields){
+        if(err){
+          console.log(err);
+        }else{
+          res.json(responseUtil.successTrue());
+          console.log('Success to delete author');  
+        }
+      })
     }
   })
 })
