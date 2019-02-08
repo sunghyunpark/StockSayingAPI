@@ -49,7 +49,7 @@ router.post('/upload/author', function(req, res){
 /*
 * author 삭제
 */
-router.delete('/delete/author/:no', function(req, res){
+router.delete('/delete/author/:no/:authorName', function(req, res){
   var no = req.params.no;
   var authorName = req.params.authorName;
   var sql = 'DELETE FROM author WHERE no=?';
@@ -63,7 +63,7 @@ router.delete('/delete/author/:no', function(req, res){
           console.log(err);
         }else{
           res.json(responseUtil.successTrue());
-          console.log('Success to delete author');  
+          console.log('Success to delete author');
         }
       })
     }
