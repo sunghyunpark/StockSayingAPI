@@ -70,6 +70,35 @@ router.delete('/delete/author/:no/:authorName', function(req, res){
   })
 })
 
+router.put('/swap/author/:toOrder/:fromOrder', function(req, res){
+  var toOrder = req.body.toOrder;
+  var fromOrder = req.body.fromOrder;
+
+  var sql = 'UPDATE author SET no = 0 WHERE no = ?';
+  conn.query(sql, [toOrder], function(err, result, fields){
+    if(err){
+      console.log(err);
+    }else{
+      var sql = 'UPDATE author SET no=? WHERE no=?';
+      conn.query(sql, [toOrder, fromOrder], function(err, result, fields){
+        if(err){
+          console.log(err);
+        }else{
+          var sql = 'UPDATE author SET no=? WHERE no=0';
+          conn.query(sql, [fromOrder], function(err, result, fields){
+            if(err){
+              console.log(err);
+            }else{
+              res.json(responseUtil.successTrue());
+              console.log('Success to swap author');
+            }
+          })
+        }
+      })
+    }
+  })
+})
+
 /*
 * author List 받기
 */
