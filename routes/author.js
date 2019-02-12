@@ -70,6 +70,9 @@ router.delete('/delete/author/:no/:authorName', function(req, res){
   })
 })
 
+/*
+* swap author order
+*/
 router.put('/swap/author', function(req, res){
   var toOrder = req.body.toOrder;
   var fromOrder = req.body.fromOrder;
@@ -104,12 +107,12 @@ router.put('/swap/author', function(req, res){
 */
 router.get('/authorList/:no', function(req, res){
   var no = req.params.no;
-  var offsetSql = (no == 0) ? '' : ' WHERE author.created_at < (SELECT created_at FROM author WHERE no='+no+')';
+  var offsetSql = (no == 0) ? '' : ' WHERE author.no >' + no;
 
   var sql = 'SELECT author_name AS authorName, '+
   'no, '+
   'created_at AS createdAt'+
-  ' FROM author' + offsetSql + ' ORDER BY created_at DESC LIMIT 30';
+  ' FROM author' + offsetSql + ' ORDER BY no ASC LIMIT 30';
 
   conn.query(sql, [], function(err, result, fields){
     if(err){
