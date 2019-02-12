@@ -70,7 +70,7 @@ router.delete('/delete/author/:no/:authorName', function(req, res){
   })
 })
 
-router.put('/swap/author/:toOrder/:fromOrder', function(req, res){
+router.put('/swap/author', function(req, res){
   var toOrder = req.body.toOrder;
   var fromOrder = req.body.fromOrder;
 
