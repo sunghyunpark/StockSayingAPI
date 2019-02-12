@@ -101,6 +101,9 @@ router.get('/list/saying/:no/:sort', function(req, res){
   })
 })
 
+/*
+* 위젯에 보여지는 최근 명언
+*/
 router.get('/recent', function(req, res){
   var sql = 'SELECT contents, '+
   'author_name AS authorName, '+
@@ -108,7 +111,7 @@ router.get('/recent', function(req, res){
   'gravity_horizontal AS gravityHorizontal, '+
   'gravity_vertical AS gravityVertical, '+
   'created_at AS createdAt '+
-  'FROM article WHERE date(created_at)=date(now()) ORDER BY created_at DESC LIMIT 1';
+  'FROM article ORDER BY created_at DESC LIMIT 1';
 
   conn.query(sql, [], function(err, result, fields){
     if(err){
