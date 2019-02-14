@@ -123,4 +123,19 @@ router.get('/authorList/:no', function(req, res){
   })
 })
 
+/*
+* 관리자 전용 api
+*/
+
+router.get('/admin/authorList', function(req, res){
+  var sql = 'SELECT * FROM author';
+  conn.query(sql, [], function(err, result, fields){
+    if(err){
+      console.log(err);
+    }else{
+      res.json(responseUtil.successTrueWithData(result));
+    }
+  })
+})
+
 module.exports = router;
