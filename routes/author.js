@@ -128,7 +128,7 @@ router.get('/authorList/:no', function(req, res){
 */
 
 router.get('/admin/authorList', function(req, res){
-  var sql = 'SELECT * FROM author';
+  var sql = 'SELECT * FROM author ORDER BY no ASC';
   conn.query(sql, [], function(err, result, fields){
     if(err){
       console.log(err);
